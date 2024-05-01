@@ -1,6 +1,9 @@
 # API Keys
 vault/
 
+# Temp Data
+temp/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
