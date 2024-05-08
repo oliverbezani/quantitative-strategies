@@ -22,10 +22,10 @@ def yf_fetch_prices(ticker, range):
     yf_ticker = yf.Ticker(ticker)
     data = yf_ticker.history(period=f'{range}d')
 
-    data_close = pd.DataFrame(data['Close'])
-    data_close.set_index(data_close.index.date, inplace=True)
+    data_close_volume = pd.DataFrame(data[['Close', 'Volume']])
+    data_close_volume.set_index(data_close_volume.index.date, inplace=True)
 
-    return data_close
+    return data_close_volume
 
 
 
