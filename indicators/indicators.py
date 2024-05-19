@@ -1,6 +1,7 @@
 import pandas as pd
+from pandas import DataFrame
 
-def rsi(prices, window = 14):
+def rsi(prices: DataFrame, window: int = 14):
     delta = prices['Close'].diff()
 
     gains = delta.where(delta > 0, 0)
@@ -14,12 +15,12 @@ def rsi(prices, window = 14):
 
     return relative_strength_index
 
-def sma(prices, window = 50):
+def sma(prices: DataFrame, window: int = 50):
     simple_moving_average = prices['Close'].rolling(window = window).mean()
 
     return simple_moving_average
 
-def bollinger_bands(prices, sma_window = 20, band_window = 20, deviations = 2):
+def bollinger_bands(prices: DataFrame, sma_window: int = 20, band_window: int = 20, deviations: int = 2):
     simple_moving_average = prices['Close'].rolling(window = sma_window).mean()
     standard_deviation = prices['Close'].rolling(window = band_window).std()
 
