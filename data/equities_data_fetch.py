@@ -2,12 +2,10 @@ from vault.api_keys import alpha_vantage
 
 from alpha_vantage.techindicators import TechIndicators
 from alpha_vantage.timeseries import TimeSeries
+import pandas as pd
 import yfinance as yf
 
-import datetime
-import pandas as pd
-
-def av_fetch_prices(ticker, range, api_key=alpha_vantage, output_format='pandas'):
+def av_fetch_prices(ticker: str, range, api_key=alpha_vantage, output_format='pandas'):
     ts = TimeSeries(key=api_key, output_format=output_format)
 
     data, meta_data = ts.get_daily(symbol=ticker)
@@ -17,7 +15,7 @@ def av_fetch_prices(ticker, range, api_key=alpha_vantage, output_format='pandas'
     return data_range.iloc[::-1]
 
 
-def yf_fetch_prices(ticker, range):
+def yf_fetch_prices(ticker: str, range: int):
 
     yf_ticker = yf.Ticker(ticker)
     data = yf_ticker.history(period=f'{range}d')
