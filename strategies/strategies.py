@@ -3,6 +3,7 @@ from data import index_ticker_fetch as itf
 from indicators import indicators as ind
 from models import lstm
 from optimisers import optimisers as opt
+from portfolio import position_adjustments as pa
 
 def sp500_top_10(capital: int): 
 
@@ -26,6 +27,10 @@ def sp500_top_10(capital: int):
     sorted_predicted_closes = sorted(positive_predicted_closes.items(), key=lambda item: item[1], reverse=True)
     top_10_predictions = dict(sorted_predicted_closes[:10])
 
-    ticker_allocations = opt.slsqp(top_10_predictions, capital)
+    if top_10_predictions: 
+        ticker_allocations = opt.slsqp(top_10_predictions, capital)
+    else: ticker_allocations = {}
+
+    pa.position_adjustments(ticker_allocations)
 
     return ticker_allocations

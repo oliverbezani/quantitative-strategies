@@ -4,6 +4,9 @@ vault/
 # Temp Data
 temp/
 
+# Mock Positions
+positions.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
