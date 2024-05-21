@@ -29,8 +29,9 @@ def sp500_top_10(capital: int):
 
     if top_10_predictions: 
         ticker_allocations = opt.slsqp(top_10_predictions, capital)
-    else: ticker_allocations = {}
+        orders = pa.position_adjustments(ticker_allocations)
+    else: 
+        ticker_allocations = {}
+        orders = pa.close_all_positions()
 
-    pa.position_adjustments(ticker_allocations)
-
-    return ticker_allocations
+    return ticker_allocations, orders
